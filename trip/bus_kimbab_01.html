@@ -15,7 +15,7 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(253, 203, 110, 0.3) 0%, rgb(255 255 255 / 30%) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -114,10 +114,11 @@
         }
         
         .highlight-box {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            background: linear-gradient(135deg, #efd5ff 0%, #d0dcff 100%);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
+            margin-top: 10px;
             box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
         }
         
@@ -198,7 +199,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 600;
         }
         
@@ -241,6 +242,7 @@
             animation: pulse 2s infinite;
         }
         
+        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -264,6 +266,10 @@
                 padding: 20px;
             }
         }
+
+        .img01 img {
+            width: -webkit-fill-available;
+        }
     </style>
 </head>
 <body>
@@ -279,11 +285,16 @@
         </div>
         
         <div class="content">
+            <div class="img01">
+                <img src="/kpop1.jpg">
+            </div>
             <div class="tagline">
                 Experience the magic of <strong>Kimbap</strong> just like in <em>K-Pop Demon Hunters</em>! 🎬<br>
                 Taste, roll, and enjoy Korea's most iconic food on this exclusive trip!
             </div>
-            
+            <div class="img01">
+                <img src="/kpop2.jpg">
+            </div>
             <div class="highlight-box">
                 <div class="highlight-title">
                     <span class="emoji">🌟</span> About Gimcheon Kimbap Festival
@@ -342,6 +353,9 @@
                 <div class="time-item">
                     <span class="emoji">📍</span>
                     <span><strong>Meeting Point:</strong> Sadang Station (Line 2,4) Exit 9</span>
+                </div>
+                <div class="img01">
+                    <img src="/sadangstation.png">
                 </div>
             </div>
         </div>

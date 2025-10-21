@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구미 라면축제 셔틀버스 | 축제버스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0968b6 0%, #8eb3e2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .hero .subtitle {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 20px;
+            transform: translateY(-20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            width: 30px;
+        }
+
+        .badge {
+            background: #FF6B6B;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .section {
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #222;
+        }
+
+        .image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            margin: 20px 0;
+            border: 2px dashed #ddd;
+        }
+
+        .emotion-box {
+            background: #FFF9E6;
+            border-left: 4px solid #FFB800;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .emotion-box strong {
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            color: #FF6B6B;
+            font-size: 18px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 27px;
+            top: 35px;
+            width: 2px;
+            height: calc(100% + 5px);
+            background: #ddd;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #FF6B6B;
+            min-width: 60px;
+            font-size: 15px;
+        }
+
+        .timeline-content {
+            padding-left: 15px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .review-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-size: 13px;
+            color: #999;
+            text-align: right;
+        }
+
+        .include-box {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .include-card {
+            flex: 1;
+            padding: 20px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .include-yes {
+            background: #E8F5E9;
+            border: 2px solid #4CAF50;
+        }
+
+        .include-no {
+            background: #FFEBEE;
+            border: 2px solid #F44336;
+        }
+
+        .include-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .include-item {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .include-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-q {
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .faq-a {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .team-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .team-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .team-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #b06bff 0%, #7253ff 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cta-subtitle {
+            font-size: 15px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 15px;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .button-primary {
+            background: white;
+            color: #FF6B6B;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .footer {
+            background: #2d3436;
+            color: #b2bec3;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .gray-section {
+            background: #f8f9fa;
+        }
+
+        /* 하단 고정 버튼 스타일 */
+        .fixed-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #6bf5ff 0%, #7491ee 100%);
+            padding: 15px 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .fixed-cta .button {
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        .fixed-cta.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>서울 ↔ 구미 라면축제<br>축제버스 2기 OPEN 🍜</h1>
+            <p class="subtitle">작년 10만명이 찾은 그 축제!<br>갓 튀긴 농심 라면 먹으러 함께 가실 분?</p>
+
+            <div class="info-box">
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <span><strong>출발:</strong> 서울 사당역 (상세 위치 별도 안내)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📅</span>
+                    <span><strong>날짜:</strong> 2025년 11월 8일 (토)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">💰</span>
+                    <span><strong>가격:</strong> 30,000원 </span>
+                </div>
+                <!-- <div class="info-item">
+                    <span class="info-icon">🎫</span>
+                    <span><strong>잔여석:</strong> <span class="highlight">12석 / 45석</span></span>
+                </div> -->
+                <div class="badge">⚡ 1기 김천 김밥축제 전석 매진!</div>
+            </div>
+        </div>
+
+        <!-- 이미지: 메인 비주얼 -->
+        <div class="image">라면축제 메인 사진</div>
+
+        <!-- 감성 스토리 -->
+        <div class="section">
+            <div class="emotion-box">
+                <p>(**내용수정필요**) 안녕하세요! 저희는 <strong>평범한 직장인 3명</strong>이에요.</p>
+                <p style="margin-top: 12px;">회사 점심시간에 "이번 주말 뭐 해?" 라고 물으면 늘 "집에서 쉴래..." 였던 저희가, 유튜브에서 우연히 본 축제 영상에
+                    꽂혀버렸어요.</p>
+                <p style="margin-top: 12px;">"가고 싶다..." 근데 문제는, <strong>축제가 너무 멀고 교통비가 너무 비싸더라고요.</strong></p>
+                <p style="margin-top: 12px;">KTX 왕복 6만원... 거기에 택시비, 주차비까지? 혼자 가기엔 부담스럽고, 같이 갈 사람 찾기도 애매하고...</p>
+                <p style="margin-top: 12px;">그래서 생각했어요. <strong>"우리끼리 버스 빌려서 가고 싶은 사람들이랑 함께 가면 되지 않을까?"</strong></p>
+            </div>
+        </div>
+
+        <!-- 이미지: 1기 김밥축제 단체사진 -->
+        <div class="image">1기 김밥축제 단체사진</div>
+
+        <!-- 공감대 형성 -->
+        <div class="section gray-section">
+            <h2 class="section-title">이런 고민 하셨죠?</h2>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="check-icon">☑️</span>
+                    <span>구미 라면축제 가고 싶은데 KTX는 비싸고...</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">☑️</span>
+                    <span>운전해서 가기엔 너무 멀고 피곤해...</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">☑️</span>
+                    <span>혼자 가기엔 심심하고 같이 갈 사람도 없고...</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">☑️</span>
+                    <span>대중교통 갈아타기 복잡하고 시간도 애매해...</span>
+                </div>
+            </div>
+            <div class="emotion-box" style="margin-top: 20px;">
+                <p style="text-align: center; font-size: 16px;"><strong>우리가 다 해결해드릴게요!<br>편하게 앉아서 가기만 하세요 🚌</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- 왜 축제버스인가 -->
+        <div class="section">
+            <h2 class="section-title">왜 축제버스와 함께 가야 할까요?</h2>
+
+            <div class="feature-card">
+                <div class="feature-icon">💚</div>
+                <div class="feature-title">합리적인 가격</div>
+                <div class="feature-desc">
+                    KTX 왕복 약 6만원 vs 축제버스 <b>30,000원</b><br>
+                    택시비, 주차비 걱정 NO! 문 앞까지 편안하게
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">새로운 만남</div>
+                <div class="feature-desc">
+                    여행과 축제를 좋아하는 사람들과 함께<br>
+                    혼자 와도 OK<br>
+                    친구들과 함께 와도 OK<br>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <div class="feature-title">최적의 동선</div>
+                <div class="feature-desc">
+                    축제장까지 직행 (환승 스트레스 제로)<br>
+                    돌아올때도 편하게<br>
+                    축제장에서 맥주도 한잔
+                </div>
+            </div>
+        </div>
+
+        <!-- 이미지: 버스 내부 -->
+        <div class="image">버스 내부 사진 (쾌적한 환경)</div>
+
+        <!-- 구미 라면축제 소개 -->
+        <div class="section gray-section">
+            <h2 class="section-title">왜 구미 라면축제인가요?</h2>
+
+            <div class="emotion-box">
+                <p><strong>우리 막내가 가장 좋아하는 음식이 라면이거든요!</strong></p>
+                <p style="margin-top: 12px;">새벽에 배고플 때, 술 마신 다음날, 비 오는 날... 라면만큼 위로가 되는 음식이 있을까요?</p>
+                <p style="margin-top: 12px;">그런 라면을 <strong>갓 튀긴 상태로</strong> 먹을 수 있다니! 구미에 농심 라면공장이 있어서 가능한 특별한 경험이에요.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-top: 20px;">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">작년 10만명이 찾은 핫한 축제</div>
+                <div class="feature-desc">전국에서 몰려드는 라면 덕후들의 성지</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏭</div>
+                <div class="feature-title">농심 라면공장이 있는 구미</div>
+                <div class="feature-desc">
+                    갓 튀긴 라면을 현장에서 바로!<br>
+                    시중에서 맛볼 수 없는 특별한 경험
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🍜</div>
+                <div class="feature-title">다양한 라면 체험</div>
+                <div class="feature-desc">
+                    전국 각지의 특색있는 라면 부스<br>
+                    바가지 없는 가격!
+                </div>
+            </div>
+        </div>
+
+        <!-- 이미지: 라면축제 현장 -->
+        <div class="image">라면축제 현장 사진 (다양한 라면 부스)</div>
+
+        <!-- 상세 일정 -->
+        <div class="section">
+            <h2 class="section-title">상세 일정</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">06:30</div>
+                    <div class="timeline-content">서울 사당역 집결<br><small style="color: #999;">잠이 덜 깼어도 괜찮아요 😴</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">06:40</div>
+                    <div class="timeline-content">출발! 🚌<br><small style="color: #999;">차 안에서 간단한 간식 제공</small></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">10:30</div>
+                    <div class="timeline-content">구미 라면축제장 도착<br><small style="color: #999;">축제장 입구에서 하차</small></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">10:30<br>~16:40</div>
+                    <div class="timeline-content">자유 시간 (축제 즐기기) 🎉<br><small style="color: #999;">충분한 시간! 마음껏
+                            즐기세요</small></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">16:45</div>
+                    <div class="timeline-content">집결 장소 모임<br><small style="color: #999;">15분 전 알림 문자 보내드려요</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">17:00</div>
+                    <div class="timeline-content">서울로 출발 🚌<br><small style="color: #999;">돌아가는 길에 배부르니 낮잠 한 숨!</small>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">20:30</div>
+                    <div class="timeline-content">서울 도착 (예상)<br><small style="color: #999;">편안한 주말 저녁 되세요 💛</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 이미지: 1기 참가자들 즐기는 모습 -->
+        <div class="image">1기 참가자들 즐기는 모습</div>
+
+        <!-- 후기 섹션 -->
+        <div class="section gray-section">
+            <h2 class="section-title">1기 김천 김밥축제,<br>함께한 분들의 후기 💬</h2>
+
+            <div class="review-card">
+                <div class="review-text">"혼자 갈까 말까 고민하다가 용기내서 신청했는데, 같이 가니까 너무너무 재밌었어요! 버스에서부터 이야기 나누면서 금방 친해졌어요 ㅎㅎ"
+                </div>
+                <div class="review-author">- 37세 직장인 김OO님</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-text">"교통비 절약하면서 새로운 친구도 사귀고 최고예요! KTX로 혼자 갔으면 심심했을텐데 같이 가니까 추억이 배로 늘어났어요. 운영진분들도 진짜
+                    친절하세요!"</div>
+                <div class="review-author">- 31세 프리랜서 박OO님</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-text">"처음엔 낯가림 많이 해서 걱정했는데, 운영진 분들이 너무 세심하게 챙겨주셔서 편하게 다녀왔어요. 축제 꿀팁도 많이 알려주시고 ☺️"
+                </div>
+                <div class="review-author">- 28세 대학원생 이OO님</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-text">"2기도 꼭 참여할게요! 벌써 기대돼요 ㅎㅎ 이번엔 라면이라니... 생각만 해도 군침 도네요. 같이 갔던 분들이랑 단톡방도 만들어서 아직도
+                    연락해요!"</div>
+                <div class="review-author">- 39세 직장인 최OO님</div>
+            </div>
+        </div>
+
+        <!-- 포함/불포함 사항 -->
+        <div class="section">
+            <h2 class="section-title">포함/불포함 사항</h2>
+            <div class="include-box">
+                <div class="include-card include-yes">
+                    <div class="include-title">✅ 포함 사항</div>
+                    <div class="include-item">왕복 교통비 (서울 ↔ 구미)</div>
+                    <div class="include-item">차량 보험</div>
+                    <div class="include-item">축제버스 3기 20% 할인쿠폰</div>
+                </div>
+                <div class="include-card include-no">
+                    <div class="include-title">❌ 불포함 사항</div>
+                    <div class="include-item">축제장 내 식사/체험 비용</div>
+                    <div class="include-item">개인 경비</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section gray-section">
+            <h2 class="section-title">자주 묻는 질문 ❓</h2>
+
+            <div class="faq-item">
+                <div class="faq-q">Q. 혼자 가도 괜찮나요?</div>
+                <div class="faq-a">물론이죠! 1기 참가자 분들 중 절반 이상이 혼자 오셨어요. 저희가 자연스럽게 분위기 만들어드리니 걱정 마세요 😊</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Q. 환불 규정이 어떻게 되나요?</div>
+                <div class="faq-a">출발 7일 전까지 00% 환불, 3일 전까지 00% 환불, 그 이후는 환불 불가입니다. (단, 대체 인원 구할 시 전액 환불 가능)</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Q. 짐은 어디에 보관하나요?</div>
+                <div class="faq-a">버스 트렁크에 보관 가능해요. 작은 가방 하나 정도는 좌석에 두셔도 돼요. 귀중품은 꼭 직접 소지해 주세요!</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Q. 날씨가 안 좋으면 어떻게 하나요?</div>
+                <div class="faq-a">비가 와도 축제는 진행되며, 저희 버스도 운행됩니다! 다만 태풍 등 기상 특보 시에는 개별 연락드려요.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Q. 친구랑 같이 가는데 옆자리 배정 가능한가요?</div>
+                <div class="faq-a">신청 시 메모 남겨주시면 최대한 배려해드릴게요! 먼저 신청하신 분이 나중에 신청하는 친구 이름 적어주시면 됩니다.</div>
+            </div>
+        </div>
+
+
+        <!-- 우리는 이런 팀 -->
+        <div class="section">
+            <div class="team-box">
+                <div class="team-title">우리는 이런 팀이에요 👥</div>
+                <div class="team-desc">
+                    직장에서 만난 동료 3명<br>
+                    여행과 먹는 것을 진심으로 좋아하는 사람들<br>
+                    축제가 멀어서 못 가는 게 아까워서 시작했어요<br>
+                    <strong>함께 즐기는 것의 가치를 믿습니다</strong>
+                </div>
+            </div>
+
+            <div class="emotion-box" style="margin-top: 30px;">
+                <p style="text-align: center;">저희도 여러분처럼 <strong>평범한 직장인</strong>이에요.</p>
+                <p style="margin-top: 12px; text-align: center;">주말에 멀리 있는 축제 가고 싶은데 혼자 가기 애매하고, 교통비는 부담스럽고...</p>
+                <p style="margin-top: 12px; text-align: center; font-size: 17px;"><strong>그래서 시작했어요.<br>함께라면 더 즐겁잖아요!
+                        💛</strong></p>
+            </div>
+        </div>
+
+        <!-- 이미지: 팀 소개 -->
+        <div class="image">축제버스 팀 소개 사진</div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-title">우리 막내의 최애 라면,<br>함께 먹으러 가요!</div>
+            <div class="cta-subtitle">⚠️ 40석 한정! 1기처럼 조기 마감될 수 있어요</div>
+            <a href="#" class="button button-primary">🍜 지금 바로 신청하기</a>
+            <a href="https://open.kakao.com/o/gLqMQGSh" class="button button-secondary">💬 카카오톡 문의하기</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <strong style="color: white;">축제버스 | Festival Bus</strong><br><br>
+            📧 이메일: festivalbuskr@gmail.com<br>
+            📸 인스타그램: @unusuallab101<br><br>
+            <a href="#" style="color: #b2bec3; text-decoration: underline;">환불/취소 정책</a> |
+            <a href="#" style="color: #b2bec3; text-decoration: underline;">이용약관</a> |
+            <a href="#" style="color: #b2bec3; text-decoration: underline;">개인정보처리방침</a><br><br>
+            <small>© 2025 FestivalBus. All rights reserved.</small>
+        </div>
+    </div>
+
+    <!-- 하단 고정 버튼 -->
+    <div class="fixed-cta" id="fixedCta">
+        <a href="#" class="button button-primary">🍜 지금 바로 신청하기</a>
+    </div>
+
+    <script>
+        // 스크롤 감지하여 하단 고정 버튼 표시
+        window.addEventListener('scroll', function () {
+            const fixedCta = document.getElementById('fixedCta');
+            const mainImage = document.querySelector('.image'); // 첫 번째 이미지 (라면축제 메인 사진)
+            const mainImageTop = mainImage.offsetTop;
+            const scrollPosition = window.scrollY + window.innerHeight;
+
+            // 라면축제 메인 사진을 지나쳤을 때 하단 고정 버튼 표시
+            if (scrollPosition > mainImageTop + 100) {
+                fixedCta.classList.add('show');
+            } else {
+                fixedCta.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+
+</html>

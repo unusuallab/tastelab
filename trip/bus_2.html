@@ -79,7 +79,7 @@
             font-size: 13px;
             font-weight: bold;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 5px;
         }
 
         .section {
@@ -106,6 +106,7 @@
             font-size: 14px;
             margin: 20px 0;
             border: 2px dashed #ddd;
+            overflow: hidden;
         }
 
         .emotion-box {
@@ -118,7 +119,7 @@
             line-height: 1.8;
         }
 
-        .emotion-box strong {
+        .emotion-box .strong-red {
             color: #FF6B6B;
             font-weight: 600;
         }
@@ -376,6 +377,7 @@
             text-align: center;
             font-size: 13px;
             line-height: 1.8;
+            margin-bottom: 30px;
         }
 
         .highlight {
@@ -419,6 +421,35 @@
         .fixed-cta.show {
             display: block;
         }
+
+        .title-font1 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .title-font2 {
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .info-item.title {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .font-small {
+            font-size: 11px;
+        }
     </style>
 </head>
 
@@ -426,13 +457,17 @@
     <div class="container">
         <!-- Hero Section -->
         <div class="hero">
-            <h1>서울 ↔ 구미 라면축제<br>축제버스 2기 OPEN 🍜</h1>
+            <p class="title-font1">축제버스 2기 OPEN!</p>
+            <p class="title-font2">구미 라면 축제</p>
             <p class="subtitle">작년 10만명이 찾은 그 축제!<br>갓 튀긴 농심 라면 먹으러 함께 가실 분?</p>
 
             <div class="info-box">
+                <div class="info-item title">
+                    <p class="center">서울-구미 축제장 왕복 셔틀 버스</p>
+                </div>
                 <div class="info-item">
                     <span class="info-icon">📍</span>
-                    <span><strong>출발:</strong> 서울 사당역 (상세 위치 별도 안내)</span>
+                    <span><strong>출발:</strong> 서울 사당역 (상세 별도 안내)</span>
                 </div>
                 <div class="info-item">
                     <span class="info-icon">📅</span>
@@ -450,23 +485,33 @@
             </div>
         </div>
 
-        <!-- 이미지: 메인 비주얼 -->
-        <div class="image">라면축제 메인 사진</div>
+        <!-- 이미지: 팀 소개 -->
+        <div class="image"><img src="image/bus2/bus_img_1.png"></div>
 
-        <!-- 감성 스토리 -->
+        <!-- 팀 소개 스토리 -->
         <div class="section">
             <div class="emotion-box">
-                <p>(**내용수정필요**) 안녕하세요! 저희는 <strong>평범한 직장인 3명</strong>이에요.</p>
-                <p style="margin-top: 12px;">회사 점심시간에 "이번 주말 뭐 해?" 라고 물으면 늘 "집에서 쉴래..." 였던 저희가, 유튜브에서 우연히 본 축제 영상에
-                    꽂혀버렸어요.</p>
-                <p style="margin-top: 12px;">"가고 싶다..." 근데 문제는, <strong>축제가 너무 멀고 교통비가 너무 비싸더라고요.</strong></p>
-                <p style="margin-top: 12px;">KTX 왕복 6만원... 거기에 택시비, 주차비까지? 혼자 가기엔 부담스럽고, 같이 갈 사람 찾기도 애매하고...</p>
-                <p style="margin-top: 12px;">그래서 생각했어요. <strong>"우리끼리 버스 빌려서 가고 싶은 사람들이랑 함께 가면 되지 않을까?"</strong></p>
+                <p class="center"><strong class="strong-red">축제버스를 기획한 우리는 이런 팀이에요.</strong></p>
+                <p class="center" style="margin-top: 12px;">직장에서 만난 동료 3명인 미희, 주연, 민<br>
+                    우리도 여러분처럼 평범한 직장인이에요.<br>
+                    여행과 먹는 것을 진심으로 좋아하는 사람들이죠.</p><br>
+                <p class="center" style="margin-top: 12px;"><strong class="strong-red">왜 축제버 스냐고요?</strong></p>
+                <p class="center" style="margin-top: 12px;">회사 점심시간에 "이번 주말 뭐 해?" 라고 물으면 늘 "집에서 쉴래..." 였던 저희가, 유튜브에서 우연히
+                    본 축제 영상에
+                    꽂혀버렸어요.
+                    "가고 싶다..." 근데 문제는, <strong>축제가 너무 멀고 교통비가 너무 비싸더라고요.</strong><br>
+                    KTX 왕복 6만원... 거기에 택시비, 주차비까지? 혼자 가기엔 부담스럽고, 같이 갈 사람 찾기도 애매하고...<br>
+                    그래서 생각했어요. <strong>"우리끼리 버스 빌려서 가고 싶은 사람들이랑 함께 가면 되지 않을까?"</strong>
+                    <br><br>
+                    그래서 시작한 축제 버스,<br>
+                    10월 1기 김천김밥축제 버스를 성공적으로 운영했고,<br>
+                    2기 구미 라면 축제까지 진행하게 됐어요!
+                </p>
             </div>
         </div>
 
         <!-- 이미지: 1기 김밥축제 단체사진 -->
-        <div class="image">1기 김밥축제 단체사진</div>
+        <!-- <div class="image">1기 김밥축제 단체사진</div> -->
 
         <!-- 공감대 형성 -->
         <div class="section gray-section">
@@ -495,6 +540,9 @@
             </div>
         </div>
 
+        <!-- 이미지: 버스 내부 -->
+        <div class="image"><img src="image/bus2/bus_img_2.png"></div>
+
         <!-- 왜 축제버스인가 -->
         <div class="section">
             <h2 class="section-title">왜 축제버스와 함께 가야 할까요?</h2>
@@ -509,16 +557,6 @@
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🤝</div>
-                <div class="feature-title">새로운 만남</div>
-                <div class="feature-desc">
-                    여행과 축제를 좋아하는 사람들과 함께<br>
-                    혼자 와도 OK<br>
-                    친구들과 함께 와도 OK<br>
-                </div>
-            </div>
-
-            <div class="feature-card">
                 <div class="feature-icon">⏰</div>
                 <div class="feature-title">최적의 동선</div>
                 <div class="feature-desc">
@@ -527,10 +565,20 @@
                     축제장에서 맥주도 한잔
                 </div>
             </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">새로운 만남</div>
+                <div class="feature-desc">
+                    여행과 축제를 좋아하는 사람들과 함께<br>
+                    혼자 와도 OK<br>
+                    친구들과 함께 와도 OK<br>
+                </div>
+            </div>
         </div>
 
-        <!-- 이미지: 버스 내부 -->
-        <div class="image">버스 내부 사진 (쾌적한 환경)</div>
+        <!-- 이미지: 라면축제 -->
+        <div class="image"><img src="image/bus2/bus_img_3.png"></div>
 
         <!-- 구미 라면축제 소개 -->
         <div class="section gray-section">
@@ -569,7 +617,7 @@
         </div>
 
         <!-- 이미지: 라면축제 현장 -->
-        <div class="image">라면축제 현장 사진 (다양한 라면 부스)</div>
+        <div class="image"><img src="image/bus2/bus_img_4.png"></div>
 
         <!-- 상세 일정 -->
         <div class="section">
@@ -582,7 +630,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">06:40</div>
-                    <div class="timeline-content">출발! 🚌<br><small style="color: #999;">차 안에서 간단한 간식 제공</small></div>
+                    <div class="timeline-content">출발! 🚌<br><small style="color: #999;">차 안에서 편하게 휴식</small></div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">10:30</div>
@@ -612,10 +660,10 @@
         </div>
 
         <!-- 이미지: 1기 참가자들 즐기는 모습 -->
-        <div class="image">1기 참가자들 즐기는 모습</div>
+        <!-- <div class="image">1기 참가자들 즐기는 모습</div> -->
 
         <!-- 후기 섹션 -->
-        <div class="section gray-section">
+        <!-- <div class="section gray-section">
             <h2 class="section-title">1기 김천 김밥축제,<br>함께한 분들의 후기 💬</h2>
 
             <div class="review-card">
@@ -641,7 +689,7 @@
                     연락해요!"</div>
                 <div class="review-author">- 39세 직장인 최OO님</div>
             </div>
-        </div>
+        </div> -->
 
         <!-- 포함/불포함 사항 -->
         <div class="section">
@@ -672,7 +720,13 @@
 
             <div class="faq-item">
                 <div class="faq-q">Q. 환불 규정이 어떻게 되나요?</div>
-                <div class="faq-a">출발 7일 전까지 00% 환불, 3일 전까지 00% 환불, 그 이후는 환불 불가입니다. (단, 대체 인원 구할 시 전액 환불 가능)</div>
+                <div class="faq-a">
+                    <strong>환불 규정</strong>
+                    <br>100% 환불: ~10/25(토)까지<br>50% 환불: 10/26(일)~11/1(토)<br>환불 불가: 11/2(일)~11/8(토)<br>
+                    <i class="font-small">* 노쇼(No-show) 시에도 환불이 불가합니다.</i><br>
+                    <i class="font-small">* 대체 인원 구할 시 전액 환불 가능합니다.</i>
+
+                </div>
             </div>
 
             <div class="faq-item">
@@ -682,7 +736,11 @@
 
             <div class="faq-item">
                 <div class="faq-q">Q. 날씨가 안 좋으면 어떻게 하나요?</div>
-                <div class="faq-a">비가 와도 축제는 진행되며, 저희 버스도 운행됩니다! 다만 태풍 등 기상 특보 시에는 개별 연락드려요.</div>
+                <div class="faq-a">
+                    축제 주최측이 진행할 경우, 축제 버스도 운영합니다.<br>
+                    다만, 태풍 등 기상 특보 시에는 개별 연락드릴게요.
+
+                </div>
             </div>
 
             <div class="faq-item">
@@ -693,7 +751,7 @@
 
 
         <!-- 우리는 이런 팀 -->
-        <div class="section">
+        <!-- <div class="section">
             <div class="team-box">
                 <div class="team-title">우리는 이런 팀이에요 👥</div>
                 <div class="team-desc">
@@ -710,16 +768,16 @@
                 <p style="margin-top: 12px; text-align: center; font-size: 17px;"><strong>그래서 시작했어요.<br>함께라면 더 즐겁잖아요!
                         💛</strong></p>
             </div>
-        </div>
+        </div> -->
 
         <!-- 이미지: 팀 소개 -->
-        <div class="image">축제버스 팀 소개 사진</div>
+        <!-- <div class="image">축제버스 팀 소개 사진</div> -->
 
         <!-- CTA Section -->
         <div class="cta-section">
             <div class="cta-title">우리 막내의 최애 라면,<br>함께 먹으러 가요!</div>
             <div class="cta-subtitle">⚠️ 40석 한정! 1기처럼 조기 마감될 수 있어요</div>
-            <a href="#" class="button button-primary">🍜 지금 바로 신청하기</a>
+            <a href="https://forms.gle/6uXVRzEPocwZPvX96" class="button button-primary">🍜 지금 바로 신청하기</a>
             <a href="https://open.kakao.com/o/gLqMQGSh" class="button button-secondary">💬 카카오톡 문의하기</a>
         </div>
 
@@ -737,7 +795,7 @@
 
     <!-- 하단 고정 버튼 -->
     <div class="fixed-cta" id="fixedCta">
-        <a href="#" class="button button-primary">🍜 지금 바로 신청하기</a>
+        <a href="https://forms.gle/6uXVRzEPocwZPvX96" class="button button-primary">🍜 지금 바로 신청하기</a>
     </div>
 
     <script>

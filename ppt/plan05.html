@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>경쟁 비교와 리스크 대응</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        /* Header Styling */
+        .section-sub {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #1e3a8a;
+        }
+
+        /* Content Layout */
+        .content-grid {
+            display: flex;
+            gap: 40px;
+            flex: 1;
+            margin-top: 10px;
+        }
+
+        .left-col {
+            flex: 0 0 42%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Comparison Table Styling */
+        .comp-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            height: 100%;
+        }
+
+        .comp-header {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 20px;
+            color: #1e3a8a;
+        }
+
+        .comp-row {
+            display: flex;
+            border-bottom: 1px solid #f1f5f9;
+            align-items: stretch;
+        }
+
+        .comp-row:last-child {
+            border-bottom: none;
+        }
+
+        .comp-label {
+            width: 25%;
+            background-color: #f8fafc;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #4b5563;
+            font-size: 14px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .comp-vs {
+            width: 37.5%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #64748b;
+            text-align: center;
+            position: relative;
+        }
+
+        .comp-our {
+            width: 37.5%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: center;
+            background-color: #eff6ff;
+            position: relative;
+        }
+
+        .comp-our::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3b82f6;
+        }
+
+        /* Risk Cards Styling */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .risk-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .risk-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .risk-icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background-color: #fee2e2;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .risk-title {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 16px;
+        }
+
+        .risk-solution {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sol-tag {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            width: fit-content;
+        }
+
+        .sol-text {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .sol-check {
+            color: #10b981;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Header -->
+        <div>
+            <p class="section-sub">Competitive Advantage &amp; Risk Management</p>
+            <h1 class="section-title">경쟁 비교 및 리스크 대응</h1>
+        </div>
+        <div class="content-grid">
+            <!-- Left Panel: Comparison -->
+            <div class="left-col">
+                <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-gray-800">
+                        <i class="fas fa-balance-scale-right text-blue-600 mr-2"></i>서비스 차별점
+                    </h3>
+                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">기존 vs 축제버스</span>
+                </div>
+                <div class="comp-container">
+                    <div
+                        class="flex bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider py-3">
+                        <div class="w-1/4 text-center">구분</div>
+                        <div class="w-[37.5%] text-center">기존 여행 상품</div>
+                        <div class="w-[37.5%] text-center text-blue-700">축제버스 (FIT)</div>
+                    </div>
+                    <!-- Row 1 -->
+                    <div class="comp-row">
+                        <div class="comp-label">
+                            <i class="fas fa-users mb-1 text-gray-400 block w-full text-center text-lg"></i>
+                            <span class="block w-full text-center">대상</span>
+                        </div>
+                        <div class="comp-vs">
+                            <span class="text-gray-400 line-through text-xs mb-1">단체 패키지</span>
+                            <span class="font-bold">45인 이상 단체</span>
+                        </div>
+                        <div class="comp-our">
+                            <span class="text-blue-500 text-xs mb-1">개별 여행객</span>
+                            <span class="font-bold">1~4인 소그룹</span>
+                        </div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="comp-row">
+                        <div class="comp-label">
+                            <i class="fas fa-calendar-alt mb-1 text-gray-400 block w-full text-center text-lg"></i>
+                            <span class="block w-full text-center">일정</span>
+                        </div>
+                        <div class="comp-vs">
+                            <span class="text-gray-400 text-xs mb-1">여행사 주도</span>
+                            <span>고정된 일정</span>
+                        </div>
+                        <div class="comp-our">
+                            <span class="text-blue-500 text-xs mb-1">축제 최적화</span>
+                            <span>자유 일정</span>
+                        </div>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="comp-row">
+                        <div class="comp-label">
+                            <i class="fas fa-map-signs mb-1 text-gray-400 block w-full text-center text-lg"></i>
+                            <span class="block w-full text-center">접근성</span>
+                        </div>
+                        <div class="comp-vs">
+                            <span class="text-gray-400 text-xs mb-1">제한적</span>
+                            <span>환승/대기 발생</span>
+                        </div>
+                        <div class="comp-our">
+                            <span class="text-blue-500 text-xs mb-1">Direct</span>
+                            <span>축제장 직행</span>
+                        </div>
+                    </div>
+                    <!-- Row 4 -->
+                    <div class="comp-row flex-1">
+                        <div class="comp-label" style="border-bottom: none;">
+                            <i class="fas fa-expand-arrows-alt mb-1 text-gray-400 block w-full text-center text-lg"></i>
+                            <span class="block w-full text-center">확장성</span>
+                        </div>
+                        <div class="comp-vs">
+                            <span class="text-gray-400 text-xs mb-1">단순 운송</span>
+                            <span>낮음</span>
+                        </div>
+                        <div class="comp-our">
+                            <span class="text-blue-500 text-xs mb-1">플랫폼화</span>
+                            <span>패키지·정기권</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Panel: Risk Management -->
+            <div class="right-col">
+                <div class="mb-3">
+                    <h3 class="text-xl font-bold text-gray-800">
+                        <i class="fas fa-shield-alt text-red-500 mr-2"></i>잠재 리스크 및 대응 방안
+                    </h3>
+                </div>
+                <div class="risk-grid">
+                    <!-- Risk 1: Demand -->
+                    <div class="risk-card">
+                        <div class="risk-header">
+                            <div class="risk-icon-box">
+                                <i class="fas fa-user-minus"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-red-400 font-bold uppercase">Demand Risk</div>
+                                <div class="risk-title">좌석 미충원</div>
+                            </div>
+                        </div>
+                        <div class="risk-solution">
+                            <span class="sol-tag">SOLUTION</span>
+                            <div class="sol-text">
+                                <p><i class="fas fa-check-circle sol-check"></i>100% 사전 예약·결제 시스템</p>
+                                <p><i class="fas fa-check-circle sol-check"></i>최소 출발 인원 미달 시 미운행 (손실 방지)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Risk 2: Weather/Schedule -->
+                    <div class="risk-card">
+                        <div class="risk-header">
+                            <div class="risk-icon-box">
+                                <i class="fas fa-cloud-showers-heavy"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-red-400 font-bold uppercase">External Risk</div>
+                                <div class="risk-title">기상 및 일정 변경</div>
+                            </div>
+                        </div>
+                        <div class="risk-solution">
+                            <span class="sol-tag">SOLUTION</span>
+                            <div class="sol-text">
+                                <p><i class="fas fa-check-circle sol-check"></i>출발 확정 시점 명확한 공지</p>
+                                <p><i class="fas fa-check-circle sol-check"></i>대체 상품 전환 또는 전액 환불 정책</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Risk 3: Safety -->
+                    <div class="risk-card">
+                        <div class="risk-header">
+                            <div class="risk-icon-box">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-red-400 font-bold uppercase">Safety Risk</div>
+                                <div class="risk-title">운행 안전 사고</div>
+                            </div>
+                        </div>
+                        <div class="risk-solution">
+                            <span class="sol-tag">SOLUTION</span>
+                            <div class="sol-text">
+                                <p><i class="fas fa-check-circle sol-check"></i>엄격한 전세버스 업체 선정 (보험 필수)</p>
+                                <p><i class="fas fa-check-circle sol-check"></i>운행 규정 준수 및 비상 연락망 구축</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Risk 4: Cost -->
+                    <div class="risk-card">
+                        <div class="risk-header">
+                            <div class="risk-icon-box">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-red-400 font-bold uppercase">Financial Risk</div>
+                                <div class="risk-title">비용 손실 가능성</div>
+                            </div>
+                        </div>
+                        <div class="risk-solution">
+                            <span class="sol-tag">SOLUTION</span>
+                            <div class="sol-text">
+                                <p><i class="fas fa-check-circle sol-check"></i>소수 대수부터 단계적 확장</p>
+                                <p><i class="fas fa-check-circle sol-check"></i>데이터 기반 회차 조정으로 공실 최소화</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

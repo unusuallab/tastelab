@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>축제버스 사업계획서</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: -70px;
+        }
+
+        .next {
+            right: -70px;
+        }
+
+        .page-indicator {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <iframe id="slideFrame" src="plan01.html"></iframe>
+
+        <button class="nav-btn prev" onclick="prevSlide()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="nav-btn next" onclick="nextSlide()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="page-indicator">
+            <span id="currentPage">1</span> / 10
+        </div>
+    </div>
+
+    <script>
+        const totalSlides = 10;
+        let current = 1;
+
+        const frame = document.getElementById("slideFrame");
+        const indicator = document.getElementById("currentPage");
+
+        function updateSlide() {
+            frame.src = `plan${String(current).padStart(2, "0")}.html`;
+            indicator.textContent = current;
+        }
+
+        function nextSlide() {
+            if (current < totalSlides) {
+                current++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (current > 1) {
+                current--;
+                updateSlide();
+            }
+        }
+
+        // 키보드 좌우 이동 지원 (선택사항)
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") nextSlide();
+            if (e.key === "ArrowLeft") prevSlide();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>사업화 계획</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        /* Header */
+        .section-sub {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #1e3a8a;
+        }
+
+        /* 3-Column Layout */
+        .content-grid {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+            height: 85%;
+        }
+
+        .plan-column {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .column-header {
+            padding: 20px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8fafc;
+        }
+
+        .header-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .header-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 20px;
+            color: #1f2937;
+        }
+
+        .column-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+
+        /* Timeline Items (Left Col) */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+            border-left: 2px solid #e5e7eb;
+        }
+
+        .timeline-item:last-child {
+            border-left-color: transparent;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #3b82f6;
+        }
+
+        .timeline-period {
+            font-size: 12px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 4px;
+            background-color: #eff6ff;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .timeline-content h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .infra-box {
+            margin-top: auto;
+            background-color: #f0f9ff;
+            border: 1px dashed #7dd3fc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* Marketing Phases (Center Col) */
+        .phase-item {
+            background-color: #f9fafb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid #10b981;
+            display: flex;
+            align-items: center;
+        }
+
+        .phase-badge {
+            font-size: 11px;
+            font-weight: 900;
+            color: #10b981;
+            text-transform: uppercase;
+            margin-right: 10px;
+            min-width: 50px;
+        }
+
+        .phase-text h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 2px;
+        }
+
+        .phase-text p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .marketing-arrow {
+            text-align: center;
+            color: #d1d5db;
+            margin: -8px 0 4px 0;
+            font-size: 12px;
+        }
+
+        /* Finance (Right Col) */
+        .finance-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .finance-table th {
+            text-align: left;
+            color: #6b7280;
+            padding: 8px 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .finance-table td {
+            padding: 8px 4px;
+            color: #1f2937;
+            border-bottom: 1px solid #f3f4f6;
+            font-weight: 500;
+        }
+
+        .finance-total {
+            border-top: 2px solid #1f2937;
+            font-weight: 700;
+        }
+
+        .profit-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 11px;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .bep-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .m-b-3 {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Header -->
+        <div>
+            <p class="section-sub">Business Roadmap</p>
+            <h1 class="section-title">사업화 계획 및 로드맵</h1>
+        </div>
+        <div class="content-grid">
+            <!-- Column 1: Product & Infrastructure -->
+            <div class="plan-column">
+                <div class="column-header">
+                    <div class="header-icon bg-blue-600">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <span class="header-title">상품 · 인프라</span>
+                </div>
+                <div class="column-body">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-period">1~3개월</div>
+                        <div class="timeline-content">
+                            <h4>축제버스 단일 상품</h4>
+                            <p>주말 중심 4~8회 실증 운영<br />수도권 출발 노선 안정화</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-period">4~6개월</div>
+                        <div class="timeline-content">
+                            <h4>패키지 · 정기권 출시</h4>
+                            <p>1일 2축제 연계 패키지<br />얼리버드 정기권 판매 개시</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-period">7~12개월</div>
+                        <div class="timeline-content">
+                            <h4>맛집버스 확장</h4>
+                            <p>비축제 시즌 맛집 탐방 테마<br />운영 지역 및 대상 확대</p>
+                        </div>
+                    </div>
+                    <div class="infra-box">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-code text-blue-500 mr-2"></i>
+                            <span class="text-sm font-bold text-gray-800">핵심 인프라 구축</span>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1 ml-6 list-disc">
+                            <li>자체 예약/결제 MVP 개발 (2개월)</li>
+                            <li>전세버스 3~5곳 파트너십 체결</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Column 2: Marketing -->
+            <div class="plan-column">
+                <div class="column-header">
+                    <div class="header-icon bg-green-500">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <span class="header-title">홍보 · 마케팅</span>
+                </div>
+                <div class="column-body">
+                    <!-- Phase 1 -->
+                    <div class="phase-item">
+                        <div class="phase-badge">Phase 1</div>
+                        <div class="phase-text">
+                            <h4>SNS 오가닉 성장</h4>
+                            <p>성공사례 콘텐츠화, 후기 확산</p>
+                        </div>
+                    </div>
+                    <div class="marketing-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <!-- Phase 2 -->
+                    <div class="phase-item">
+                        <div class="phase-badge">Phase 2</div>
+                        <div class="phase-text">
+                            <h4>커뮤니티 바이럴</h4>
+                            <p>여행/지역 커뮤니티 집중 침투</p>
+                        </div>
+                    </div>
+                    <div class="marketing-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <!-- Phase 3 -->
+                    <div class="phase-item">
+                        <div class="phase-badge">Phase 3</div>
+                        <div class="phase-text">
+                            <h4>유료 퍼포먼스 광고</h4>
+                            <p>축제 2주 전 타겟 광고 집중</p>
+                        </div>
+                    </div>
+                    <div class="marketing-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <!-- Phase 4 -->
+                    <div class="phase-item">
+                        <div class="phase-badge">Phase 4</div>
+                        <div class="phase-text">
+                            <h4>제휴 및 협업</h4>
+                            <p>지자체/인플루언서/OTA 연계</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column 3: Finance -->
+            <div class="plan-column">
+                <div class="column-header">
+                    <div class="header-icon bg-indigo-600">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <span class="header-title">자금 운용 계획</span>
+                </div>
+                <div class="column-body">
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-700 mb-2 border-l-4 border-indigo-500 pl-2">초기 소요 자금
+                            (6개월)</h4>
+                        <table class="finance-table">
+                            <tr>
+                                <th>항목</th>
+                                <th class="text-right">금액</th>
+                            </tr>
+                            <tr>
+                                <td>시스템 개발</td>
+                                <td class="text-right">500만</td>
+                            </tr>
+                            <tr>
+                                <td>홍보/마케팅</td>
+                                <td class="text-right">300만</td>
+                            </tr>
+                            <tr>
+                                <td>법인/보험</td>
+                                <td class="text-right">200만</td>
+                            </tr>
+                            <tr>
+                                <td>예비 운영비</td>
+                                <td class="text-right">500만</td>
+                            </tr>
+                            <tr class="finance-total bg-gray-50">
+                                <td class="font-bold text-indigo-900 pt-2">합계</td>
+                                <td class="text-right font-bold text-indigo-900 pt-2">1,500만 원</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="profit-box">
+                        <div class="text-blue-200 text-xs font-bold mb-1 uppercase tracking-wider">Revenue Projection
+                        </div>
+                        <div class="text-3xl font-black mb-1">756만 원</div>
+                        <div class="text-sm opacity-80 m-b-3">(6개월 누적 예상 수익)</div>
+                        <div class="w-full bg-white bg-opacity-20 h-px m-b-3"></div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-chart-line text-yellow-400 mr-1"></i>
+                            <span class="font-bold text-lg">손익분기점 (BEP)</span>
+                        </div>
+                        <div class="bep-badge border border-yellow-400 text-yellow-300">
+                            운영 8~10개월 차 예상
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

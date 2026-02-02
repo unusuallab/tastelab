@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>실행 일정과 성장 전략</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        /* Header */
+        .section-sub {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #1e3a8a;
+        }
+
+        /* Timeline Section */
+        .timeline-wrapper {
+            position: relative;
+            padding: 20px 0 20px 0;
+            margin-bottom: 10px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50px;
+            /* Aligned with circles */
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #e5e7eb;
+            z-index: 0;
+            border-radius: 2px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            /* Full width for visual */
+            height: 4px;
+            background: #3b82f6;
+            /* Solid color instead of gradient */
+            z-index: 0;
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 10;
+        }
+
+        .t-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+            text-align: center;
+            position: relative;
+        }
+
+        .t-circle {
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border: 4px solid #3b82f6;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            margin-top: 40px;
+            /* Space for line */
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .t-item:hover .t-circle {
+            transform: scale(1.2);
+            background-color: #3b82f6;
+        }
+
+        .t-period {
+            font-family: 'Black Han Sans', sans-serif;
+            color: #1e3a8a;
+            font-size: 20px;
+            margin-bottom: 8px;
+            position: absolute;
+            top: 0;
+        }
+
+        .t-content {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .t-item:hover .t-content {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #bfdbfe;
+        }
+
+        .t-title {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .t-desc {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.4;
+            display: block;
+        }
+
+        /* Growth Strategy Section */
+        .strategy-container {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        .strategy-card {
+            flex: 1;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-1 {
+            background-color: #eff6ff;
+            border: 1px solid #dbeafe;
+        }
+
+        .card-2 {
+            background-color: #dbeafe;
+            border: 1px solid #bfdbfe;
+        }
+
+        .card-3 {
+            background-color: #1e3a8a;
+            color: white;
+            border: 1px solid #1e3a8a;
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .card-1 .step-label {
+            background-color: #ffffff;
+            color: #3b82f6;
+        }
+
+        .card-2 .step-label {
+            background-color: #ffffff;
+            color: #2563eb;
+        }
+
+        .card-3 .step-label {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #93c5fd;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-1 .card-title {
+            color: #1e3a8a;
+        }
+
+        .card-2 .card-title {
+            color: #1e3a8a;
+        }
+
+        .card-3 .card-title {
+            color: white;
+        }
+
+        .kpi-list {
+            margin-top: auto;
+        }
+
+        .kpi-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .card-1 .kpi-item {
+            color: #4b5563;
+        }
+
+        .card-2 .kpi-item {
+            color: #374151;
+        }
+
+        .card-3 .kpi-item {
+            color: #dbeafe;
+        }
+
+        .kpi-icon {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .arrow-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 24px;
+        }
+
+        .bg-number {
+            position: absolute;
+            right: -10px;
+            bottom: -20px;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 140px;
+            opacity: 0.1;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .card-3 .bg-number {
+            opacity: 0.15;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Header -->
+        <div>
+            <p class="section-sub">Timeline &amp; Growth Strategy</p>
+            <h1 class="section-title">실행 일정과 스케일업</h1>
+        </div>
+        <!-- Timeline Section -->
+        <div class="timeline-wrapper">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress"></div>
+            <div class="timeline-items">
+                <!-- Month 1 -->
+                <div class="t-item">
+                    <span class="t-period">1 Month</span>
+                    <div class="t-circle"></div>
+                    <div class="t-content">
+                        <span class="t-title">기반 구축</span>
+                        <span class="t-desc">예약 시스템 MVP 개발<br />법인 설립 및 보험 가입</span>
+                    </div>
+                </div>
+                <!-- Month 2-3 -->
+                <div class="t-item">
+                    <span class="t-period">2~3 Month</span>
+                    <div class="t-circle"></div>
+                    <div class="t-content">
+                        <span class="t-title">실증 (PoC)</span>
+                        <span class="t-desc">첫 축제버스 운영 (2~4회)<br />SNS 마케팅 및 데이터 확보</span>
+                    </div>
+                </div>
+                <!-- Month 4-6 -->
+                <div class="t-item">
+                    <span class="t-period">4~6 Month</span>
+                    <div class="t-circle"></div>
+                    <div class="t-content">
+                        <span class="t-title">안정화</span>
+                        <span class="t-desc">월 2~3회 정기 운영<br />1일 2축제 패키지 론칭</span>
+                    </div>
+                </div>
+                <!-- Month 7-9 -->
+                <div class="t-item">
+                    <span class="t-period">7~9 Month</span>
+                    <div class="t-circle"></div>
+                    <div class="t-content">
+                        <span class="t-title">규모 확장</span>
+                        <span class="t-desc">정기권 판매 (Lock-in)<br />운영 대수 확대 (3대 이상)</span>
+                    </div>
+                </div>
+                <!-- Month 10-12 -->
+                <div class="t-item">
+                    <span class="t-period">10~12 Month</span>
+                    <div class="t-circle"></div>
+                    <div class="t-content">
+                        <span class="t-title">다각화</span>
+                        <span class="t-desc">맛집 탐방버스 론칭<br />외국인 타겟 시범 운영</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Growth Strategy Section -->
+        <div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-chart-line text-blue-600 mr-2"></i>연차별 성장 전략 (Scale-up)
+            </h3>
+            <div class="strategy-container">
+                <!-- Year 1 -->
+                <div class="strategy-card card-1">
+                    <div class="bg-number">1</div>
+                    <span class="step-label">1st Year</span>
+                    <h4 class="card-title">수도권 중심 안정화</h4>
+                    <p class="text-sm text-gray-600 mb-4">서울/경기 출발 핵심 노선에 집중하여 초기 팬덤 및 운영 데이터 확보</p>
+                    <div class="w-full border-t border-blue-200 mb-4 opacity-50"></div>
+                    <div class="kpi-list">
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-bullseye"></i></span>
+                            <span>고객 DB 1,000명 확보</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-sync-alt"></i></span>
+                            <span>재구매율 30% 이상</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-bus"></i></span>
+                            <span>월 4~8회 정기 운행</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow-connector"><i class="fas fa-chevron-right"></i></div>
+                <!-- Year 2 -->
+                <div class="strategy-card card-2">
+                    <div class="bg-number">2</div>
+                    <span class="step-label">2nd Year</span>
+                    <h4 class="card-title">지역 확장 + 다각화</h4>
+                    <p class="text-sm text-gray-700 mb-4">부산, 대구 등 광역시 출발 노선 확대 및 비축제 시즌 상품(맛집) 정착</p>
+                    <div class="w-full border-t border-blue-300 mb-4 opacity-50"></div>
+                    <div class="kpi-list">
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-map-marked-alt"></i></span>
+                            <span>광역시 출발 거점 추가</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-ticket-alt"></i></span>
+                            <span>정기권/패키지 매출 30%</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-utensils"></i></span>
+                            <span>맛집버스 정기 운영</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow-connector"><i class="fas fa-chevron-right"></i></div>
+                <!-- Year 3 -->
+                <div class="strategy-card card-3">
+                    <div class="bg-number">3</div>
+                    <span class="step-label">3rd Year</span>
+                    <h4 class="card-title">플랫폼 생태계 구축</h4>
+                    <p class="text-sm text-blue-100 mb-4">자체 예약 시스템 개방 및 지자체 B2B 협업을 통한 종합 축제 모빌리티화</p>
+                    <div class="w-full border-t border-blue-400 mb-4 opacity-50"></div>
+                    <div class="kpi-list">
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-globe-asia"></i></span>
+                            <span>외국인 관광객 20% 달성</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-handshake"></i></span>
+                            <span>지자체 공식 셔틀 계약</span>
+                        </div>
+                        <div class="kpi-item">
+                            <span class="kpi-icon"><i class="fas fa-server"></i></span>
+                            <span>예약 솔루션 개방 (SaaS)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

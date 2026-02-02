@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>마무리 및 비전</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        /* Header */
+        .section-sub {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #1e3a8a;
+        }
+
+        /* Summary Section (Top) */
+        .summary-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .summary-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .sum-title {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .sum-desc {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .arrow-box {
+            color: #cbd5e1;
+            font-size: 20px;
+            margin: 0 20px;
+        }
+
+        /* KPI Section (Middle) */
+        .kpi-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .kpi-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .kpi-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-right: 10px;
+        }
+
+        .kpi-badge {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+
+        .kpi-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #bfdbfe;
+        }
+
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #3b82f6;
+        }
+
+        .kpi-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .kpi-value {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 24px;
+            color: #1f2937;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Vision Section (Bottom) */
+        .vision-container {
+            margin-top: auto;
+            background-color: #1e3a8a;
+            border-radius: 20px;
+            padding: 30px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-content {
+            position: relative;
+            z-index: 10;
+            max-width: 65%;
+        }
+
+        .vision-main {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 28px;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .vision-sub {
+            font-size: 15px;
+            color: #bfdbfe;
+            font-weight: 300;
+        }
+
+        .contact-box {
+            position: relative;
+            z-index: 10;
+            text-align: right;
+        }
+
+        .contact-btn {
+            background-color: #f59e0b;
+            color: white;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            color: #93c5fd;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            font-size: 200px;
+            opacity: 0.05;
+            color: white;
+            transform: rotate(15deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Header -->
+        <div>
+            <p class="section-sub">Closing &amp; Vision</p>
+            <h1 class="section-title">마무리 및 비전</h1>
+        </div>
+        <!-- Summary Section -->
+        <div class="summary-container">
+            <!-- Problem -->
+            <div class="summary-card">
+                <div class="summary-icon-box bg-red-50 text-red-500">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div>
+                    <span class="sum-title text-gray-800">접근성 병목 문제</span>
+                    <span class="sum-desc">가보고 싶지만 포기하는<br />지역 축제 수요 존재</span>
+                </div>
+            </div>
+            <div class="arrow-box"><i class="fas fa-chevron-right"></i></div>
+            <!-- Solution -->
+            <div class="summary-card">
+                <div class="summary-icon-box bg-blue-50 text-blue-600">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <div>
+                    <span class="sum-title text-blue-900">축제버스 솔루션</span>
+                    <span class="sum-desc">FIT 맞춤 직행 셔틀 &amp;<br />좌석 기반 수익 모델</span>
+                </div>
+            </div>
+            <div class="arrow-box"><i class="fas fa-chevron-right"></i></div>
+            <!-- Proof -->
+            <div class="summary-card">
+                <div class="summary-icon-box bg-green-50 text-green-600">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <div>
+                    <span class="sum-title text-gray-800">시장성 검증 완료</span>
+                    <span class="sum-desc">김천김밥축제 전석 매진<br />즉시 지불 의사 확인</span>
+                </div>
+            </div>
+        </div>
+        <!-- KPI Section -->
+        <div class="kpi-wrapper">
+            <div class="kpi-header">
+                <i class="fas fa-chart-line text-blue-600 mr-2 text-xl"></i>
+                <h3 class="kpi-title">1st Year Key Performance Indicators</h3>
+                <span class="kpi-badge">목표 달성 지표</span>
+            </div>
+            <div class="kpi-grid">
+                <!-- KPI 1 -->
+                <div class="kpi-card">
+                    <i class="fas fa-flag-checkered kpi-icon text-gray-400"></i>
+                    <div class="kpi-value">30<span class="text-sm font-normal ml-1">회</span></div>
+                    <div class="kpi-label">축제버스 운영</div>
+                </div>
+                <!-- KPI 2 -->
+                <div class="kpi-card">
+                    <i class="fas fa-users kpi-icon text-blue-500"></i>
+                    <div class="kpi-value">1,000<span class="text-sm font-normal ml-1">명+</span></div>
+                    <div class="kpi-label">누적 탑승객</div>
+                </div>
+                <!-- KPI 3 -->
+                <div class="kpi-card">
+                    <i class="fas fa-chair kpi-icon text-indigo-500"></i>
+                    <div class="kpi-value">80<span class="text-sm font-normal ml-1">%+</span></div>
+                    <div class="kpi-label">평균 좌석 충원율</div>
+                </div>
+                <!-- KPI 4 -->
+                <div class="kpi-card">
+                    <i class="fas fa-sync-alt kpi-icon text-green-500"></i>
+                    <div class="kpi-value">30<span class="text-sm font-normal ml-1">%+</span></div>
+                    <div class="kpi-label">재구매율 달성</div>
+                </div>
+                <!-- KPI 5 -->
+                <div class="kpi-card">
+                    <i class="fas fa-star kpi-icon text-yellow-400"></i>
+                    <div class="kpi-value">4.5<span class="text-sm font-normal ml-1">점</span></div>
+                    <div class="kpi-label">고객 만족도</div>
+                </div>
+                <!-- KPI 6 -->
+                <div class="kpi-card">
+                    <i class="fas fa-won-sign kpi-icon text-gray-600"></i>
+                    <div class="kpi-value">4,000<span class="text-sm font-normal ml-1">만</span></div>
+                    <div class="kpi-label">첫해 예상 매출</div>
+                </div>
+            </div>
+        </div>
+        <!-- Vision Section -->
+        <div class="vision-container">
+            <i class="fas fa-paper-plane bg-pattern"></i>
+            <div class="vision-content">
+                <div class="flex items-center mb-2">
+                    <span
+                        class="bg-blue-500 bg-opacity-30 text-blue-100 text-xs font-bold px-3 py-1 rounded-full border border-blue-400 mr-3">OUR
+                        VISION</span>
+                </div>
+                <p class="vision-main">"가보고 싶지만 갈 수 없었던 축제를<br /><span class="text-yellow-400">누구나 쉽게 갈 수 있는 축제</span>로
+                    만듭니다."</p>
+                <p class="vision-sub">개별 관광객의 이동 경험 혁신을 통해 지역 축제 활성화와 지방 경제 르네상스를 이끌겠습니다.</p>
+            </div>
+            <div class="contact-box">
+                <div class="contact-btn">
+                    <i class="fas fa-handshake mr-2"></i> 파트너십 제안하기
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope mr-2"></i>contact@festivalbus.kr</p>
+                    <p><i class="fas fa-phone mr-2"></i>02-1234-5678</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

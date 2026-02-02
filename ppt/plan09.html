@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>팀 역량과 운영 체계</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        /* Header */
+        .section-sub {
+            color: #3b82f6;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #1e3a8a;
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: flex;
+            gap: 24px;
+            justify-content: space-between;
+        }
+
+        .member-card {
+            flex: 1;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            border-color: #bfdbfe;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: #e5e7eb;
+        }
+
+        .card-tech::before {
+            background-color: #3b82f6;
+        }
+
+        /* Blue */
+        .card-mkt::before {
+            background-color: #10b981;
+        }
+
+        /* Green */
+        .card-ops::before {
+            background-color: #f59e0b;
+        }
+
+        /* Amber */
+
+        .profile-icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 32px;
+        }
+
+        .card-tech .profile-icon-box {
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .card-mkt .profile-icon-box {
+            color: #10b981;
+            background-color: #ecfdf5;
+        }
+
+        .card-ops .profile-icon-box {
+            color: #f59e0b;
+            background-color: #fffbeb;
+        }
+
+        .role-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-tech .role-badge {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .card-mkt .role-badge {
+            background-color: #ecfdf5;
+            color: #047857;
+        }
+
+        .card-ops .role-badge {
+            background-color: #fffbeb;
+            color: #b45309;
+        }
+
+        .member-name {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 22px;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .member-title {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .skill-list {
+            width: 100%;
+            text-align: left;
+            background-color: #f9fafb;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .skill-item {
+            font-size: 13px;
+            color: #4b5563;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .skill-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-item i {
+            margin-top: 3px;
+            margin-right: 8px;
+            font-size: 10px;
+        }
+
+        .card-tech .skill-item i {
+            color: #3b82f6;
+        }
+
+        .card-mkt .skill-item i {
+            color: #10b981;
+        }
+
+        .card-ops .skill-item i {
+            color: #f59e0b;
+        }
+
+        /* System Section */
+        .system-container {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .system-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .system-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-right: 12px;
+        }
+
+        .system-line {
+            flex: 1;
+            height: 1px;
+            background-color: #e5e7eb;
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+
+        .system-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sys-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #1e3a8a;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .sys-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 6px;
+        }
+
+        .sys-desc {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .check-badge {
+            margin-top: auto;
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #1e40af;
+            background-color: #dbeafe;
+            padding: 2px 8px;
+            border-radius: 4px;
+            width: fit-content;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Header -->
+        <div>
+            <p class="section-sub">Team Capability &amp; Operations</p>
+            <h1 class="section-title">팀 역량 및 운영 체계</h1>
+        </div>
+        <div class="content-wrapper">
+            <!-- Team Section -->
+            <div class="team-grid">
+                <!-- Member 1: Tech/CEO -->
+                <div class="member-card card-tech">
+                    <span class="role-badge">Technology &amp; Strategy</span>
+                    <div class="profile-icon-box">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="member-name">대표이사</h3>
+                    <p class="member-title">8년차 풀스택 개발자</p>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>예약·결제·CRM 시스템 자체 구축</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>외주 비용 90% 절감 및 빠른 유지보수</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>데이터 기반 비즈니스 모델 설계</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 2: Marketing -->
+                <div class="member-card card-mkt">
+                    <span class="role-badge">Marketing &amp; Growth</span>
+                    <div class="profile-icon-box">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="member-name">CMO (마케팅)</h3>
+                    <p class="member-title">20년 경력 퍼포먼스 전문가</p>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>SNS 및 퍼포먼스 마케팅 전문성</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>축제 성공 사례 콘텐츠화 및 바이럴</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>커뮤니티 타겟 마케팅 및 팬덤 구축</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 3: Operations -->
+                <div class="member-card card-ops">
+                    <span class="role-badge">Operations &amp; Safety</span>
+                    <div class="profile-icon-box">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="member-name">COO (운영)</h3>
+                    <p class="member-title">현장 운영 및 파트너십 관리</p>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>전세버스 업체 파트너십 및 계약 관리</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>현장 안전 관리 및 비상 대응 체계</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-circle"></i>
+                            <p>고객 CS 및 현장 품질(QC) 총괄</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- System Section -->
+            <div class="system-container">
+                <div class="system-header">
+                    <i class="fas fa-cogs text-gray-400 mr-2 text-xl"></i>
+                    <h3 class="system-title">안정적 운영 체계 (Operation System)</h3>
+                    <div class="system-line"></div>
+                </div>
+                <div class="system-grid">
+                    <!-- Sys 1 -->
+                    <div class="system-card">
+                        <div class="sys-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4 class="sys-title">전세버스 파트너십</h4>
+                        <p class="sys-desc">검증된 전세버스 업체 3~5곳과 연간 파트너십 체결로 안정적 배차 확보</p>
+                        <span class="check-badge"><i class="fas fa-check mr-1"></i>공급망 확보</span>
+                    </div>
+                    <!-- Sys 2 -->
+                    <div class="system-card">
+                        <div class="sys-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="sys-title">법규 및 안전 준수</h4>
+                        <p class="sys-desc">여객자동차 운수사업법 준수, 전 차량 보험 가입 및 여행업 등록 완료</p>
+                        <span class="check-badge"><i class="fas fa-check mr-1"></i>리스크 제거</span>
+                    </div>
+                    <!-- Sys 3 -->
+                    <div class="system-card">
+                        <div class="sys-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4 class="sys-title">데이터 최적화</h4>
+                        <p class="sys-desc">예약 데이터를 기반으로 회차 및 노선을 최적화하여 공실률 최소화</p>
+                        <span class="check-badge"><i class="fas fa-check mr-1"></i>수익성 강화</span>
+                    </div>
+                    <!-- Sys 4 -->
+                    <div class="system-card">
+                        <div class="sys-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4 class="sys-title">실증 경험 보유</h4>
+                        <p class="sys-desc">김천김밥축제 셔틀 전석 매진 및 무사고 운영을 통한 실무 노하우 축적</p>
+                        <span class="check-badge"><i class="fas fa-check mr-1"></i>검증 완료</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

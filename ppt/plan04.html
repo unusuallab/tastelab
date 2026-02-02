@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>사업 모델과 수익 구조</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        .header-deco {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: #1e3a8a;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 800;
+            font-size: 36px;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            height: 100%;
+        }
+
+        .left-panel {
+            flex: 0 0 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8fafc;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .model-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background-color: #1e3a8a;
+        }
+
+        .math-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1px;
+            font-size: 16px;
+        }
+
+        .math-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .math-value {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 18px;
+        }
+
+        .total-profit {
+            margin-top: 16px;
+            padding-top: 4px;
+            border-top: 2px dashed #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profit-value {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 32px;
+            color: #1e3a8a;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px;
+            color: #64748b;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table td {
+            padding: 16px 12px;
+            font-weight: 700;
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+            color: #1e3a8a;
+            font-size: 18px;
+            background-color: #eff6ff;
+        }
+
+        .data-table tr:last-child td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .data-table tr:last-child td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .service-features {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-chip {
+            background-color: #eff6ff;
+            color: #1e3a8a;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-container {
+            flex: 1;
+            width: 100%;
+            min-height: 200px;
+            margin-top: auto;
+        }
+
+        .m-t-7 {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="header-deco"></div>
+        <!-- Header -->
+        <div>
+            <p class="section-title">Business Model &amp; Profitability</p>
+            <h1 class="main-title">사업 모델과 수익 구조</h1>
+        </div>
+        <div class="content-wrapper">
+            <!-- Left Panel: Unit Economics -->
+            <div class="left-panel">
+                <div class="mb-2">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">핵심 수익 모델: 축제 전용 셔틀</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                        개별 관광객(FIT)에게 <span class="text-blue-600 font-bold">좌석 단위</span>로 판매하며,
+                        운영 효율화를 통해 1대 운영만으로도 즉시 수익이 발생하는 구조입니다.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-chip"><i class="fas fa-bus mr-2"></i>한정형 노선</div>
+                        <div class="feature-chip"><i class="fas fa-ticket-alt mr-2"></i>좌석 예약제</div>
+                        <div class="feature-chip"><i class="fas fa-clock mr-2"></i>최적 일정</div>
+                    </div>
+                </div>
+                <!-- Unit Economics Card -->
+                <div class="model-card">
+                    <div class="highlight-bar"></div>
+                    <div class="flex justify-between items-end mb-6">
+                        <h4 class="text-lg font-bold text-gray-800">1대 기준 수익 구조</h4>
+                        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">토요일 1회 기준</span>
+                    </div>
+                    <!-- Revenue -->
+                    <div class="math-row">
+                        <div class="flex items-center">
+                            <i class="fas fa-plus-circle text-blue-500 mr-3"></i>
+                            <span class="math-label">매출 (Revenue)</span>
+                        </div>
+                        <span class="math-value text-blue-600">1,330,000 원</span>
+                    </div>
+                    <div class="pl-8 text-xs text-gray-400 mb-4">
+                        * 35석(평균) × 38,000원(인당)
+                    </div>
+                    <!-- Cost -->
+                    <div class="math-row">
+                        <div class="flex items-center">
+                            <i class="fas fa-minus-circle text-red-400 mr-3"></i>
+                            <span class="math-label">비용 (Cost)</span>
+                        </div>
+                        <span class="math-value text-red-500">700,000 원</span>
+                    </div>
+                    <div class="pl-8 text-xs text-gray-400 mb-2">
+                        * 전세버스 대절비 (성수기 기준)
+                    </div>
+                    <!-- Profit -->
+                    <div class="total-profit">
+                        <span class="text-lg font-bold text-gray-800">순수익 (Net Profit)</span>
+                        <span class="profit-value">630,000 원</span>
+                    </div>
+                    <div class="text-right text-xs text-gray-400 mt-1">마진율 약 47%</div>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-auto m-t-7">
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3"></i>
+                        <p class="text-sm text-yellow-800 font-medium">
+                            시장 검증 완료: 등산버스, 마라톤버스와 유사한 구조이나 '축제'라는 확실한 테마와 집객력으로 더 높은 좌석 점유율 기대
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Panel: Scale-up Simulation -->
+            <div class="right-panel">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-gray-800">운영 대수별 확장 시뮬레이션</h3>
+                    <div class="flex items-center text-sm text-blue-600 font-bold">
+                        <i class="fas fa-chart-line mr-2"></i> Scale-up Strategy
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">구분</th>
+                            <th width="25%">1대 운영</th>
+                            <th width="25%">3대 운영</th>
+                            <th width="25%">5대 운영</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>예상 매출</td>
+                            <td>1,330,000</td>
+                            <td>3,990,000</td>
+                            <td>6,650,000</td>
+                        </tr>
+                        <tr>
+                            <td>운영 비용</td>
+                            <td>700,000</td>
+                            <td>2,100,000</td>
+                            <td>3,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>예상 순수익</td>
+                            <td>630,000</td>
+                            <td>1,890,000</td>
+                            <td>3,150,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-xs text-gray-400 text-right mb-4">* 단위: 원 / 충원율 100% 기준 가정</p>
+                <div class="chart-container">
+                    <div id="profitChart" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var chartDom = document.getElementById('profitChart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow' }
+                },
+                legend: {
+                    data: ['매출', '순수익'],
+                    bottom: 0
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '10%',
+                    top: '10%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['1대', '3대', '5대'],
+                    axisLine: { show: false },
+                    axisTick: { show: false }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: function (value) {
+                            return value / 10000 + '만';
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '매출',
+                        type: 'bar',
+                        data: [1330000, 3990000, 6650000],
+                        itemStyle: { color: '#e2e8f0' },
+                        barWidth: '30%'
+                    },
+                    {
+                        name: '순수익',
+                        type: 'bar',
+                        data: [630000, 1890000, 3150000],
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#3b82f6' },
+                                { offset: 1, color: '#1e3a8a' }
+                            ])
+                        },
+                        barWidth: '30%',
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: function (params) {
+                                return (params.value / 10000).toLocaleString() + '만';
+                            },
+                            fontWeight: 'bold',
+                            color: '#1e3a8a'
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        });
+    </script>
+</body>
+
+</html>

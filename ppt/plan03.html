@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>시장 현황 및 목표 고객</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Black+Han+Sans&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 32px 48px;
+            /* 👈 기존 40/60 → 살짝 축소 */
+        }
+
+        .header-deco {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background-color: #f3f4f6;
+            border-bottom-left-radius: 100%;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 160px;
+        }
+
+        .stat-card.highlight {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            border-width: 2px;
+        }
+
+        .stat-card.alert {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+            border-width: 2px;
+        }
+
+        .stat-number {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .customer-section {
+            background-color: #1e3a8a;
+            border-radius: 20px;
+            color: white;
+            padding: 15px 40px;
+            flex: 1;
+            margin-top: 0px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .customer-profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #1e3a8a;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        .tag-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .check-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            right: -50px;
+            bottom: -50px;
+            font-size: 300px;
+            opacity: 0.05;
+            color: white;
+            transform: rotate(-15deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="header-deco"></div>
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="mb-8">
+                <span class="text-blue-600 font-bold tracking-widest text-sm uppercase">Market &amp; Customer</span>
+                <h1 class="text-4xl font-bold text-gray-900 mt-1">
+                    시장 현황 및 목표 고객
+                </h1>
+                <p class="text-gray-500 mt-2 text-lg">
+                    충분한 공급과 수요가 존재하지만, <strong class="text-gray-800">'이동'이 병목인 시장 구조</strong>
+                </p>
+            </div>
+            <!-- Market Stats Section -->
+            <div class="grid grid-cols-3 gap-6 mb-4">
+                <!-- Stat 1 -->
+                <div class="stat-card">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 font-bold">전국 지역축제 수</span>
+                        <i class="fas fa-map-marked-alt text-gray-300 text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="stat-number text-gray-800">1,214</span>
+                        <span class="text-xl font-bold text-gray-600">개</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-2">이미 전국적으로 광범위하게 분포</p>
+                </div>
+                <!-- Stat 2 -->
+                <div class="stat-card highlight">
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-600 font-bold">10만 명 이상 방문 축제</span>
+                        <i class="fas fa-users text-blue-200 text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="stat-number text-blue-600">268</span>
+                        <span class="text-xl font-bold text-blue-400">개</span>
+                    </div>
+                    <p class="text-sm text-blue-400 mt-2">지방 축제도 충분한 집객력 보유</p>
+                </div>
+                <!-- Stat 3 -->
+                <div class="stat-card alert">
+                    <div class="flex items-center justify-between">
+                        <span class="text-red-500 font-bold">교통 불편 지역 축제</span>
+                        <i class="fas fa-exclamation-triangle text-red-200 text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="stat-number text-red-500">500</span>
+                        <span class="text-xl font-bold text-red-400">개+</span>
+                    </div>
+                    <p class="text-sm text-red-400 mt-2">녹지형·수변형 위치로 접근성 열악</p>
+                </div>
+            </div>
+            <!-- Bridge Text -->
+            <div class="text-center my-4 relative">
+                <div aria-hidden="true" class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-200"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="px-4 bg-white text-lg font-medium text-gray-500">
+                        이 시장을 가장 필요로 하는 <span class="text-blue-700 font-bold">핵심 고객</span>은?
+                    </span>
+                </div>
+            </div>
+            <!-- Target Customer Section -->
+            <div class="customer-section">
+                <i class="fas fa-user-friends bg-pattern"></i>
+                <!-- Left: Persona Profile -->
+                <div class="flex flex-col items-center mr-12 text-center" style="min-width: 200px;">
+                    <div class="customer-profile-img mb-4">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">FIT 개별 여행객</h3>
+                    <p class="text-blue-200 mb-4">2040 수도권 거주</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <span class="bg-white text-blue-900 text-xs font-bold px-2 py-1 rounded">#뚜벅이</span>
+                        <span class="bg-white text-blue-900 text-xs font-bold px-2 py-1 rounded">#소그룹</span>
+                    </div>
+                </div>
+                <!-- Right: Detailed Needs -->
+                <div class="flex-1 border-l border-blue-400 pl-12">
+                    <h4
+                        class="text-xl font-bold text-yellow-300 mb-6 uppercase tracking-wider border-b border-blue-500 pb-2 inline-block">
+                        Target Persona: 1~4인 소그룹
+                    </h4>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+                        <div class="col-span-2 mb-2">
+                            <p class="text-blue-100 text-sm mb-2 opacity-80">Pain Points &amp; Needs</p>
+                        </div>
+                        <div class="check-list-item">
+                            <div class="check-icon"><i class="fas fa-check"></i></div>
+                            <span>자가용이 없거나 <strong class="text-white border-b border-yellow-400/50">운전
+                                    비선호</strong></span>
+                        </div>
+                        <div class="check-list-item">
+                            <div class="check-icon"><i class="fas fa-check"></i></div>
+                            <span>SNS로 정보를 찾고 <strong class="text-white border-b border-yellow-400/50">자발적
+                                    참여</strong></span>
+                        </div>
+                        <div class="check-list-item">
+                            <div class="check-icon"><i class="fas fa-check"></i></div>
+                            <span>현지 <strong class="text-white border-b border-yellow-400/50">로컬 콘텐츠·체험</strong>
+                                선호</span>
+                        </div>
+                        <div class="check-list-item">
+                            <div class="check-icon"><i class="fas fa-check"></i></div>
+                            <span>이동 걱정 없이 <strong class="text-white border-b border-yellow-400/50">음주 가능</strong>한
+                                환경</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex">
+                        <div class="tag-badge"><i class="fas fa-bus mr-2"></i>직행 셔틀 선호</div>
+                        <div class="tag-badge"><i class="fas fa-calendar-check mr-2"></i>자유 일정</div>
+                        <div class="tag-badge"><i class="fas fa-coins mr-2"></i>확실한 지불 의사</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
